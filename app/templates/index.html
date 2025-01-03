@@ -1,16 +1,6 @@
-<!DOCTYPE html>
+{% extends "base.html"%}
 
-<html>
-    <head>
-        {% if title%}
-        <title> {{title}} - Microblog</title>
-        {%else%}
-        <title>Welcome to the Microblog</title>
-        {%endif%}
-    
-    
-    </head>
-    <body>
+{%block content%}
         <h1> Hello, {{user.username}} these are the posts for today: </h1>
         {% for post in posts%}
         <div>
@@ -19,5 +9,15 @@
             </p>
         </div>
         {%endfor%}
-    </body>
-</html>
+{% endblock%}
+
+{%block new_content%}
+        <h1> Hello, {{user.username}} these are the posts for today: </h1>
+        {% for post in posts%}
+        <div>
+            <p>{{post.author.username}} says: 
+                <b>{{post.body}}</b>
+            </p>
+        </div>
+        {%endfor%}
+{% endblock%}

@@ -36,4 +36,5 @@ def index():
     ]
 
 
-    return render_template('index.html', title = '', user = user, posts = posts)
+    return render_template('index.html', title = 'My Microblog', 
+                           user = user, posts = posts)
