@@ -4,8 +4,9 @@
 # to execture whena cleint requests a given URL. 
 
 # The view function here just returns a greeting for these two urls
-from flask import render_template
+from flask import render_template, flash, redirect, url_for
 from app import app 
+from app.forms import LoginForm
 
 
 # decorators here will be modify the function of index()
@@ -15,7 +16,7 @@ from app import app
 # so when the browser requests / or index urls flask will invoke this function 
 # and pass its return value back to the browser as a response. 
 
-# Templates will be used in place of presentation of the html 
+# Templates will be used in place of presentation of the htmkol 
 # allowing us to focus solely on the python code.
 
 @app.route("/") 
@@ -36,5 +37,25 @@ def index():
     ]
 
 
+    # user posts 
+    postal = [
+        {'speaker': {'name':'Frankenstein'}, 
+         'body': 'I like walking with my arms in front of me'}
+    ]
+
     return render_template('index.html', title = 'My Microblog', 
-                           user = user, posts = posts)
+                           user = user, posts = posts, postal = postal)
+                           #
+# construct new view function that allows us to execute the logic for this form 
+# this should render the template we made as login.html 
+@app.route("/login", methods=['GET','POST'])
+def login(): 
+    form = LoginForm() 
+    if form.validate_on_submit(): 
+        flash('Login requested for user {}, remember_me={}'.format(
+            form.username.data, form.remember_me.data
+        ))
+        return redirect(url_for('index'))
+    return render_template('login.html', title = "Login", 
+                           form = form)
+# the dectorator methods tells flask this view function accepts the get and post request

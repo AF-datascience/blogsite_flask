@@ -12,12 +12,12 @@
 {% endblock%}
 
 {%block new_content%}
-        <h1> Hello, {{user.username}} these are the posts for today: </h1>
-        {% for post in posts%}
+        <h1> Hello, {{postal[0].speaker.name}} these are the posts for today: </h1>
+        
         <div>
-            <p>{{post.author.username}} says: 
-                <b>{{post.body}}</b>
+            <p>{{postal[0]['speaker'].get('name1')}} says: 
+                <b>{{postal[0]['body']}}</b>
             </p>
         </div>
-        {%endfor%}
+       
 {% endblock%}
